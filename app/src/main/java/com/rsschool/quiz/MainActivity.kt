@@ -5,10 +5,11 @@ import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
 import com.rsschool.quiz.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), Router {
-
+class MainActivity : AppCompatActivity(), Router, AnswerAccumulator {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var pager :ViewPager2
+    private lateinit var pager: ViewPager2
+    private val userAnswerMap: MutableMap<Int, Pair<Int, Boolean>> = mutableMapOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -30,4 +31,14 @@ class MainActivity : AppCompatActivity(), Router {
         pager.currentItem -= 1
     }
 
+    override fun addAnswerToMap(questionIndex: Int, viewId: Int, isCorrect: Boolean) {
+        userAnswerMap[questionIndex] = viewId to isCorrect
+    }
+
+    override fun getPoints(): Int {
+        val numberOfCorrectAnswers = userAnswerMap.values.count { it.second }
+        return numberOfCorrectAnswers * 10
+    }
+
+    override fun getPossiblePoints() = QuestionList.questions.size * 10
 }
