@@ -11,10 +11,10 @@ class PagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) 
     override fun createFragment(position: Int): Fragment {
         val currentQuestion = QuestionList.questions[position]
         return when (position) {
-            0 -> QuestionFragment.getInstance(currentQuestion,QuestionFragment.FIRST_QUESTION)
-            QuestionList.questions.lastIndex -> QuestionFragment.getInstance(currentQuestion,QuestionFragment.LAST_QUESTION)
+            0 -> QuestionFragment.getInstance(currentQuestion,QuestionFragment.FIRST_QUESTION,position)
+            QuestionList.questions.lastIndex -> QuestionFragment.getInstance(currentQuestion,QuestionFragment.LAST_QUESTION,position)
             itemCount -> TODO("Set share fragment")
-            else -> QuestionFragment.getInstance(currentQuestion) //Normal question fragment
+            else -> QuestionFragment.getInstance(currentQuestion,position) //Normal question fragment
         }
     }
 }

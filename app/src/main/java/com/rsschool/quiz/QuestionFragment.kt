@@ -2,6 +2,7 @@ package com.rsschool.quiz
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,9 +16,14 @@ class QuestionFragment() : Fragment() {
     private var _binding: FragmentQuizBinding? = null
     private val binding get() = _binding!!
     private var router:Router?=null
+    private var accumulator:AnswerAccumulator?=null
+
     override fun onAttach(context: Context) {
         if (context is Router){
             router = context
+        }
+        if (context.applicationContext is AnswerAccumulator){
+            accumulator = context.applicationContext as AnswerAccumulator
         }
         super.onAttach(context)
     }
@@ -29,6 +35,7 @@ class QuestionFragment() : Fragment() {
     ): View {
         _binding = FragmentQuizBinding.inflate(inflater)
         val view = binding.root
+
         //TODO theme changer
         return view
     }
@@ -36,11 +43,24 @@ class QuestionFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val question = arguments?.getSerializable("question") as Question
         val state = arguments?.getInt("state", -1)
+        val position = arguments?.getInt("position",-1)!!
+        val questionText = question.questionText
+        val answers = question.answers
+        val correctAnswer = question.correctAnswerNumber
+
+
+
+        context?.applicationContext
         binding.nextButton.setOnClickListener {
             router?.nextFragment()
+            accumulator?.addAnswerToMap(position,binding.radioGroup.checkedRadioButtonId,)
+            accumulator?.printMap()
+
         }
         binding.previousButton.setOnClickListener {
             router?.prevFragment()
+            accumulator?.addAnswerToMap(position,binding.radioGroup.checkedRadioButtonId,)
+            accumulator?.printMap()
         }
         when (state) {
             FIRST_QUESTION -> binding.previousButton.isEnabled = false
@@ -50,13 +70,14 @@ class QuestionFragment() : Fragment() {
                 binding.nextButton.text = "Next"
             }
         }
-        val questionText = question.questionText
+        binding.toolbar.title = "Question ${position +1}"
         binding.question.text = questionText
-        val answers = question.answers
         for (i in 0 until binding.radioGroup.size) {
             val radioButton: RadioButton = binding.radioGroup[i] as RadioButton
+            val id = accumulator?.getSelectedAnswerId(position)
             if (i < answers.size) {
                 radioButton.text = answers[i]
+                radioButton.isChecked = radioButton.id == id
             } else {
                 radioButton.isVisible = false
             }
@@ -71,21 +92,22 @@ class QuestionFragment() : Fragment() {
 
     override fun onDetach() {
         router=null
+        accumulator=null
         super.onDetach()
     }
 
     companion object {
         @JvmStatic
-        fun getInstance(question: Question): Fragment {
+        fun getInstance(question: Question,position:Int): Fragment {
             val fragment = QuestionFragment()
-            val bundle = bundleOf("question" to question)
+            val bundle = bundleOf("question" to question,"position" to position)
             fragment.arguments = bundle
             return fragment
         }
 
         @JvmStatic
-        fun getInstance(question: Question, state: Int): Fragment {
-            val fragment = getInstance(question)
+        fun getInstance(question: Question, state: Int, position: Int): Fragment {
+            val fragment = getInstance(question,position)
             fragment.arguments?.putInt("state", state)
             return fragment
         }
