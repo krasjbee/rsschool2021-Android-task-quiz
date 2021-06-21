@@ -1,6 +1,5 @@
 package com.rsschool.quiz
 
-import android.annotation.SuppressLint
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -9,7 +8,6 @@ class PagerAdapter(private val activity: FragmentActivity) : FragmentStateAdapte
     //+1 is for share fragment
     override fun getItemCount(): Int = QuestionList.questions.size + 1
 
-    @SuppressLint("ResourceAsColor")
     override fun createFragment(position: Int): Fragment {
 
         val currentQuestion: Question = try {
@@ -24,7 +22,6 @@ class PagerAdapter(private val activity: FragmentActivity) : FragmentStateAdapte
             else -> QuestionFragment.getInstance(currentQuestion, position).also {
                 val indexOfTheme = position.rem(10)
                 activity.setTheme(Themes.list[indexOfTheme])
-//                activity.window.statusBarColor=StatusBarColors.list[indexOfTheme]
             }
         }
     }
