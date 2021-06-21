@@ -8,4 +8,5 @@ interface AnswerAccumulator {
     fun getSelectedAnswerId(position:Int):Int
     //fixme delete
     fun printMap()
+    fun resetAnswers()
 }

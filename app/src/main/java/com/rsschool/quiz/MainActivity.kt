@@ -1,8 +1,7 @@
 package com.rsschool.quiz
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.rsschool.quiz.databinding.ActivityMainBinding
 
@@ -24,11 +23,15 @@ class MainActivity : AppCompatActivity(), Router {
         }
     }
 
-    override fun nextFragment() {
+    override fun toNextFragment() {
         pager.currentItem += 1
     }
 
-    override fun prevFragment() {
+    override fun toPrevFragment() {
         pager.currentItem -= 1
+    }
+
+    override fun toStartFragment() {
+        pager.currentItem = 0
     }
 }

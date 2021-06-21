@@ -2,27 +2,28 @@ package com.rsschool.quiz
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.core.os.bundleOf
-import androidx.core.view.*
+import androidx.core.view.get
+import androidx.core.view.isVisible
+import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import com.rsschool.quiz.databinding.FragmentQuizBinding
 
-class QuestionFragment() : Fragment() {
+class QuestionFragment : Fragment() {
     private var _binding: FragmentQuizBinding? = null
     private val binding get() = _binding!!
-    private var router:Router?=null
-    private var accumulator:AnswerAccumulator?=null
+    private var router: Router? = null
+    private var accumulator: AnswerAccumulator? = null
 
     override fun onAttach(context: Context) {
-        if (context is Router){
+        if (context is Router) {
             router = context
         }
-        if (context.applicationContext is AnswerAccumulator){
+        if (context.applicationContext is AnswerAccumulator) {
             accumulator = context.applicationContext as AnswerAccumulator
         }
         super.onAttach(context)
@@ -52,14 +53,14 @@ class QuestionFragment() : Fragment() {
 
         context?.applicationContext
         binding.nextButton.setOnClickListener {
-            router?.nextFragment()
-            accumulator?.addAnswerToMap(position,binding.radioGroup.checkedRadioButtonId,)
+            router?.toNextFragment()
+            accumulator?.addAnswerToMap(position, binding.radioGroup.checkedRadioButtonId)
             accumulator?.printMap()
 
         }
         binding.previousButton.setOnClickListener {
-            router?.prevFragment()
-            accumulator?.addAnswerToMap(position,binding.radioGroup.checkedRadioButtonId,)
+            router?.toPrevFragment()
+            accumulator?.addAnswerToMap(position, binding.radioGroup.checkedRadioButtonId)
             accumulator?.printMap()
         }
         when (state) {

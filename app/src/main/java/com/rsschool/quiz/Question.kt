@@ -6,4 +6,9 @@ data class Question(
     val questionText: String,
     val answers: List<String>,
     val correctAnswerNumber: Int //Todo check if string is suitable
-) : Serializable
+) : Serializable {
+    companion object {
+        public val EMPTY: Question = Question("", emptyList(), 0)
+    }
+}
+

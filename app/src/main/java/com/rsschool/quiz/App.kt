@@ -20,6 +20,10 @@ class App:Application(),AnswerAccumulator {
         return numberOfCorrectAnswers * 10
     }
 
+    override fun resetAnswers() {
+        userAnswerMap.clear()
+    }
+
     override fun getPossiblePoints() = QuestionList.questions.size * 10
 
     override fun getSelectedAnswerId(position: Int) = userAnswerMap[position]?.first ?: -1

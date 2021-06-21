@@ -1,6 +1,7 @@
 package com.rsschool.quiz
 
 interface Router {
-    fun nextFragment()
-    fun prevFragment()
+    fun toNextFragment()
+    fun toPrevFragment()
+    fun toStartFragment()
 }
