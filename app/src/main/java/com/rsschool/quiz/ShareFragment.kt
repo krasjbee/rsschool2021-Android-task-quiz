@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.rsschool.quiz.databinding.FragmentShareBinding
+import kotlin.system.exitProcess
 
 class ShareFragment : Fragment() {
     private var _binding: FragmentShareBinding? = null
@@ -36,7 +37,7 @@ class ShareFragment : Fragment() {
         binding.tvYourScore.text = resultText.toString()
 
         binding.ibExit.setOnClickListener {
-
+            exitProcess(0)
         }
         binding.ibRetry.setOnClickListener {
             answerAccumulator?.resetAnswers()
