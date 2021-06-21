@@ -1,8 +1,7 @@
 package com.rsschool.quiz
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.rsschool.quiz.databinding.ActivityMainBinding
 
@@ -22,6 +21,7 @@ class MainActivity : AppCompatActivity(), Router {
             orientation = ViewPager2.ORIENTATION_HORIZONTAL //FIXME delete if it's unnecessary
             isUserInputEnabled = false
         }
+
     }
 
     override fun nextFragment() {

@@ -37,10 +37,7 @@ class QuestionFragment() : Fragment() {
         _binding = FragmentQuizBinding.inflate(inflater)
         val view = binding.root
         val position = arguments?.getInt("position", -1)!!
-        when (position.rem(2)) {
-            1 -> activity?.setTheme(R.style.Theme_Quiz_First)
-            0 -> activity?.setTheme(R.style.Theme_Quiz_Second)
-        }
+
         //TODO theme changer
         return view
     }
@@ -88,7 +85,6 @@ class QuestionFragment() : Fragment() {
                 radioButton.isVisible = false
             }
         }
-
         super.onViewCreated(view, savedInstanceState)
     }
 
