@@ -9,8 +9,6 @@ class PagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) 
     override fun getItemCount(): Int = QuestionList.questions.size + 1
 
     override fun createFragment(position: Int): Fragment {
-
-
         val currentQuestion: Question = try {
             QuestionList.questions[position]
         } catch (e: Exception) {

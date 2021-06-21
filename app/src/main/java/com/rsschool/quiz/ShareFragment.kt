@@ -1,6 +1,7 @@
 package com.rsschool.quiz
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,8 +16,7 @@ class ShareFragment : Fragment() {
     private var router: Router? = null
 
     override fun onAttach(context: Context) {
-        if (context.applicationContext is AnswerAccumulator) answerAccumulator =
-            context.applicationContext as AnswerAccumulator
+        answerAccumulator = Answers
         if (context is Router) router = context
         super.onAttach(context)
     }
@@ -32,15 +32,23 @@ class ShareFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val resultText = StringBuilder("Your score is ").append(answerAccumulator?.getPoints())
+        binding.tvYourScore.text = resultText.toString()
+
         binding.ibExit.setOnClickListener {
-            Int
+
         }
         binding.ibRetry.setOnClickListener {
             answerAccumulator?.resetAnswers()
             router?.toStartFragment()
         }
         binding.ibShare.setOnClickListener {
-
+            val intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, answerAccumulator?.getAnswers())
+                type = "text/plain"
+            }
+            startActivity(intent)
         }
         super.onViewCreated(view, savedInstanceState)
     }

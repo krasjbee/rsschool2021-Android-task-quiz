@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity(), Router {
             orientation = ViewPager2.ORIENTATION_HORIZONTAL //FIXME delete if it's unnecessary
             isUserInputEnabled = false
         }
+
     }
 
     override fun toNextFragment() {
@@ -33,5 +34,6 @@ class MainActivity : AppCompatActivity(), Router {
 
     override fun toStartFragment() {
         pager.currentItem = 0
+        pager.adapter = PagerAdapter(this)
     }
 }

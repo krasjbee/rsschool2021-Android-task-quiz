@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.core.os.bundleOf
+import androidx.core.view.forEachIndexed
 import androidx.core.view.get
 import androidx.core.view.isVisible
 import androidx.core.view.size
@@ -18,14 +19,16 @@ class QuestionFragment : Fragment() {
     private val binding get() = _binding!!
     private var router: Router? = null
     private var accumulator: AnswerAccumulator? = null
+    private lateinit var question: Question
 
     override fun onAttach(context: Context) {
         if (context is Router) {
             router = context
         }
-        if (context.applicationContext is AnswerAccumulator) {
-            accumulator = context.applicationContext as AnswerAccumulator
-        }
+//        if (context.applicationContext is AnswerAccumulator) {
+//            accumulator = context.applicationContext as AnswerAccumulator
+//        }
+        accumulator = Answers
         super.onAttach(context)
     }
 
@@ -42,9 +45,9 @@ class QuestionFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val question = arguments?.getSerializable("question") as Question
+        question = arguments?.getSerializable("question") as Question
         val state = arguments?.getInt("state", -1)
-        val position = arguments?.getInt("position",-1)!!
+        val position = arguments?.getInt("position", -1)!!
         val questionText = question.questionText
         val answers = question.answers
         val correctAnswer = question.correctAnswerNumber
@@ -54,13 +57,21 @@ class QuestionFragment : Fragment() {
         context?.applicationContext
         binding.nextButton.setOnClickListener {
             router?.toNextFragment()
-            accumulator?.addAnswerToMap(position, binding.radioGroup.checkedRadioButtonId)
+            accumulator?.addAnswerToMap(
+                position,
+                binding.radioGroup.checkedRadioButtonId,
+                getAnswerIndex()
+            )
             accumulator?.printMap()
-
         }
+
         binding.previousButton.setOnClickListener {
             router?.toPrevFragment()
-            accumulator?.addAnswerToMap(position, binding.radioGroup.checkedRadioButtonId)
+            accumulator?.addAnswerToMap(
+                position,
+                binding.radioGroup.checkedRadioButtonId,
+                getAnswerIndex()
+            )
             accumulator?.printMap()
         }
         when (state) {
@@ -71,7 +82,7 @@ class QuestionFragment : Fragment() {
                 binding.nextButton.text = "Next"
             }
         }
-        binding.toolbar.title = "Question ${position +1}"
+        binding.toolbar.title = "Question ${position + 1}"
         binding.question.text = questionText
         for (i in 0 until binding.radioGroup.size) {
             val radioButton: RadioButton = binding.radioGroup[i] as RadioButton
@@ -92,23 +103,32 @@ class QuestionFragment : Fragment() {
     }
 
     override fun onDetach() {
-        router=null
-        accumulator=null
+        router = null
+        accumulator = null
         super.onDetach()
+    }
+
+    private fun getAnswerIndex(): Int {
+        var checkIndex: Int = -1
+        binding.radioGroup.forEachIndexed { index, view ->
+            val radioButton = view as RadioButton
+            if (radioButton.isChecked) checkIndex = index
+        }
+        return checkIndex
     }
 
     companion object {
         @JvmStatic
-        fun getInstance(question: Question,position:Int): Fragment {
+        fun getInstance(question: Question, position: Int): Fragment {
             val fragment = QuestionFragment()
-            val bundle = bundleOf("question" to question,"position" to position)
+            val bundle = bundleOf("question" to question, "position" to position)
             fragment.arguments = bundle
             return fragment
         }
 
         @JvmStatic
         fun getInstance(question: Question, state: Int, position: Int): Fragment {
-            val fragment = getInstance(question,position)
+            val fragment = getInstance(question, position)
             fragment.arguments?.putInt("state", state)
             return fragment
         }
