@@ -25,15 +25,15 @@ class MainActivity : AppCompatActivity(), Router {
     }
 
     override fun toNextFragment() {
-        pager.currentItem += 1
+        pager.setCurrentItem(pager.currentItem + 1, false)
     }
 
     override fun toPrevFragment() {
-        pager.currentItem -= 1
+        pager.setCurrentItem(pager.currentItem - 1, false)
     }
 
     override fun toStartFragment() {
-        pager.currentItem = 0
+        pager.setCurrentItem(0, false)
         pager.adapter = PagerAdapter(this)
     }
 }

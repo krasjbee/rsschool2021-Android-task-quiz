@@ -50,7 +50,7 @@ class QuestionFragment : Fragment() {
         val position = arguments?.getInt("position", -1)!!
         val questionText = question.questionText
         val answers = question.answers
-        val correctAnswer = question.correctAnswerNumber
+
 
 
         binding.nextButton.setOnClickListener {

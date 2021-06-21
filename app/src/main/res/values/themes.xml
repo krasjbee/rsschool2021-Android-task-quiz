@@ -1,4 +1,5 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
+
     <style name="Theme.Quiz" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorOnPrimary">@color/black</item>
         <item name="colorOnSecondary">@color/black</item>
@@ -24,4 +25,105 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/yellow_100_dark</item>
     </style>
+    <!--    third theme -->
+    <style name="Theme.Quiz.Third" parent="Theme.Quiz">
+        <item name="colorPrimary">@color/purple_800</item>
+        <item name="colorPrimaryDark">@color/purple_800_dark</item>
+        <item name="colorPrimaryVariant">@color/purple_800_light</item>
+        <item name="colorSecondary">@color/purple_200</item>
+        <item name="colorSecondaryVariant">@color/purple_200_light</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/purple_200_dark</item>
+    </style>
+    <!--    fourth theme -->
+    <style name="Theme.Quiz.Fourth" parent="Theme.Quiz">
+        <item name="colorPrimary">@color/blue_800</item>
+        <item name="colorPrimaryDark">@color/blue_800_dark</item>
+        <item name="colorPrimaryVariant">@color/blue_800_light</item>
+        <item name="colorSecondary">@color/blue_200</item>
+        <item name="colorSecondaryVariant">@color/blue_200_light</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/blue_200_dark</item>
+    </style>
+    <!--    fifth theme -->
+    <style name="Theme.Quiz.Fifth" parent="Theme.Quiz">
+        <item name="colorPrimary">@color/gray_700</item>
+        <item name="colorPrimaryDark">@color/gray_700_dark</item>
+        <item name="colorPrimaryVariant">@color/gray_700_light</item>
+        <item name="colorSecondary">@color/gray_400</item>
+        <item name="colorSecondaryVariant">@color/gray_400_light</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/gray_400_dark</item>
+    </style>
+    <!--    sixth theme -->
+    <style name="Theme.Quiz.Sixth" parent="Theme.Quiz">
+        <item name="colorPrimary">@color/purple_800</item>
+        <item name="colorPrimaryDark">@color/purple_800_dark</item>
+        <item name="colorPrimaryVariant">@color/purple_800_light</item>
+        <item name="colorSecondary">@color/blue_400</item>
+        <item name="colorSecondaryVariant">@color/blue_400_light</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/blue_400_dark</item>
+    </style>
+    <!--    seventh theme -->
+    <style name="Theme.Quiz.Seventh" parent="Theme.Quiz">
+        <item name="colorPrimary">@color/red_800</item>
+        <item name="colorPrimaryDark">@color/red_800_dark</item>
+        <item name="colorPrimaryVariant">@color/red_800_light</item>
+        <item name="colorSecondary">@color/indigo_400</item>
+        <item name="colorSecondaryVariant">@color/indigo_400_light</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/indigo_400_dark</item>
+    </style>
+    <!--    eighth theme -->
+    <style name="Theme.Quiz.Eighth" parent="Theme.Quiz">
+        <item name="colorPrimary">@color/purple_900</item>
+        <item name="colorPrimaryDark">@color/purple_900_dark</item>
+        <item name="colorPrimaryVariant">@color/purple_900_light</item>
+        <item name="colorSecondary">@color/light_blue_300</item>
+        <item name="colorSecondaryVariant">@color/light_blue_300_light</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/light_blue_300_dark</item>
+    </style>
+    <!--    ninth theme -->
+    <style name="Theme.Quiz.Ninth" parent="Theme.Quiz">
+        <item name="colorPrimary">@color/blue_400</item>
+        <item name="colorPrimaryDark">@color/blue_400_dark</item>
+        <item name="colorPrimaryVariant">@color/blue_400_light</item>
+        <item name="colorSecondary">@color/gray_400</item>
+        <item name="colorSecondaryVariant">@color/gray_400_light</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/gray_400_dark</item>
+    </style>
+    <!--    tenth theme -->
+    <style name="Theme.Quiz.Tenth" parent="Theme.Quiz">
+        <item name="colorPrimary">@color/blue_800</item>
+        <item name="colorPrimaryDark">@color/blue_800_dark</item>
+        <item name="colorPrimaryVariant">@color/blue_800_light</item>
+        <item name="colorSecondary">@color/deep_purple_400</item>
+        <item name="colorSecondaryVariant">@color/deep_purple_400_light</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/deep_purple_400_dark</item>
+    </style>
+
+    <style name="Theme.Quiz.Start" parent="Theme.Quiz">
+        <item name="colorPrimary">@color/gray_400</item>
+        <item name="colorPrimaryDark">@color/gray_400_dark</item>
+        <item name="colorPrimaryVariant">@color/gray_400_light</item>
+        <item name="colorSecondary">@color/deep_purple_400</item>
+        <item name="colorSecondaryVariant">@color/deep_purple_400_light</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/deep_purple_400_dark</item>
+    </style>
+
+    <style name="Theme.Quiz.Last" parent="Theme.Quiz">
+        <item name="colorPrimary">@color/blue_800</item>
+        <item name="colorPrimaryDark">@color/blue_800_dark</item>
+        <item name="colorPrimaryVariant">@color/blue_800_light</item>
+        <item name="colorSecondary">@color/indigo_400</item>
+        <item name="colorSecondaryVariant">@color/indigo_400_light</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/indigo_400_dark</item>
+    </style>
+
 </resources>

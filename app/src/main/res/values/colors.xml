@@ -17,4 +17,78 @@
     <color name="deep_purple_100">#d1c4e9</color>
     <color name="deep_purple_100_light">#fff7ff</color>
     <color name="deep_purple_100_dark">#a094b7</color>
+
+    <!--theme 3 colors-->
+    <!-- primary-->
+    <color name="purple_800">#6a1b9a</color>
+    <color name="purple_800_light">#9c4dcc</color>
+    <color name="purple_800_dark">#38006b</color>
+    <!--secondary-->
+    <color name="purple_200">#ce93d8</color>
+    <color name="purple_200_light">#ffc4ff</color>
+    <color name="purple_200_dark">#9c64a6</color>
+
+    <!--theme 4 colors-->
+    <!--primary-->
+    <color name="blue_800">#1565c0</color>
+    <color name="blue_800_light">#5e92f3</color>
+    <color name="blue_800_dark">#003c8f</color>
+    <!--secondary-->
+    <color name="blue_200">#90caf9</color>
+    <color name="blue_200_light">#c3fdff</color>
+    <color name="blue_200_dark">#5d99c6</color>
+
+    <!--theme 5 colors-->
+    <!--primary-->
+    <color name="gray_700">#616161</color>
+    <color name="gray_700_light">#8e8e8e</color>
+    <color name="gray_700_dark">#373737</color>
+    <!--secondary-->
+    <color name="gray_400">#bdbdbd</color>
+    <color name="gray_400_light">#efefef</color>
+    <color name="gray_400_dark">#8d8d8d</color>
+
+    <!--theme 6 colors-->
+    <!--primary-->
+    <!--purple_800-->
+    <!--secondary-->
+    <color name="blue_400">#42a5f5</color>
+    <color name="blue_400_light">#80d6ff</color>
+    <color name="blue_400_dark">#0077c2</color>
+
+    <!--theme 7 colors-->
+    <!--primary-->
+    <color name="red_800">#c62828</color>
+    <color name="red_800_light">#ff5f52</color>
+    <color name="red_800_dark">#8e0000</color>
+    <!--secondary-->
+    <color name="indigo_400">#5c6bc0</color>
+    <color name="indigo_400_light">#8e99f3</color>
+    <color name="indigo_400_dark">#26418f</color>
+
+    <!--theme 8 colors-->
+    <!--primary-->
+    <color name="purple_900">#4a148c</color>
+    <color name="purple_900_light">#7c43bd</color>
+    <color name="purple_900_dark">#12005e</color>
+    <!--secondary-->
+    <color name="light_blue_300">#4fc3f7</color>
+    <color name="light_blue_300_light">#8bf6ff</color>
+    <color name="light_blue_300_dark">#0093c4</color>
+
+    <!--theme 9 colors-->
+    <!--primary-->
+    <!--blue_400-->
+    <!--secondary-->
+    <!--gray_400-->
+
+    <!--theme 10 colors-->
+    <!--primary-->
+    <!--blue_800-->
+    <!--secondary-->
+    <color name="deep_purple_400">#7E57C2</color>
+    <color name="deep_purple_400_light">#b085f5</color>
+    <color name="deep_purple_400_dark">#4d2c91</color>
+
+
 </resources>
