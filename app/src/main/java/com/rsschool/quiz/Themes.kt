@@ -13,6 +13,4 @@ object Themes {
         R.style.Theme_Quiz_Ninth,
         R.style.Theme_Quiz_Tenth,
     )
-    const val START = R.style.Theme_Quiz_Start
-    const val LAST = R.style.Theme_Quiz_Last
 }

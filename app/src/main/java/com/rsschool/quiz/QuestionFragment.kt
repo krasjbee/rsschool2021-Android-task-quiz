@@ -40,7 +40,6 @@ class QuestionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         question = arguments?.getSerializable("question") as Question
-        val state = arguments?.getInt("state", -1)
         val position = arguments?.getInt("position", -1)!!
         val questionText = question.questionText
         val answers = question.answers
@@ -51,12 +50,15 @@ class QuestionFragment : Fragment() {
         binding.previousButton.setOnClickListener {
             navigateToPreviousFragment(position)
         }
+        binding.toolbar.setOnClickListener {
+            navigateToNextFragment(position)
+        }
 
         binding.nextButton.isEnabled = false
         binding.toolbar.title = "Question ${position + 1}"
         binding.question.text = questionText
 
-        setupFragmentByState(state)
+        setupFragmentByState(position)
 
         binding.radioGroup.setOnCheckedChangeListener { _, _ ->
             binding.nextButton.isEnabled = true
@@ -66,10 +68,11 @@ class QuestionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    private fun setupFragmentByState(state: Int?) {
-        when (state) {
-            FIRST_QUESTION -> binding.previousButton.isEnabled = false
-            LAST_QUESTION -> binding.nextButton.text = getString(R.string.submit_button_text)
+    private fun setupFragmentByState(position: Int) {
+        when (position) {
+            0 -> binding.previousButton.isEnabled = false
+            QuestionList.questions.lastIndex -> binding.nextButton.text =
+                getString(R.string.submit_button_text)
             else -> binding.nextButton.text = getString(R.string.next_button_text)
         }
     }
@@ -134,14 +137,5 @@ class QuestionFragment : Fragment() {
             return fragment
         }
 
-        @JvmStatic
-        fun getInstance(question: Question, state: Int, position: Int): Fragment {
-            val fragment = getInstance(question, position)
-            fragment.arguments?.putInt("state", state)
-            return fragment
-        }
-
-        const val FIRST_QUESTION = 0
-        const val LAST_QUESTION = 1
     }
 }

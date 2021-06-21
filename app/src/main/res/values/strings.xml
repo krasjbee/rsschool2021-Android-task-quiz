@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Quiz</string>
-    <string name="your_score">\"Your score is \"</string>
+    <string name="your_score">Your score is\u0020</string>
     <string name="submit_button_text">SUBMIT</string>
     <string name="next_button_text">Next</string>
     <string name="previous_button_text">Previous</string>
+    <string name="out_of_score_string">\ out of\u0020</string>
 </resources>

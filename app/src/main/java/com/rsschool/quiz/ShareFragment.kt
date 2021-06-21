@@ -51,6 +51,8 @@ class ShareFragment : Fragment() {
     private fun setupScore() {
         val resultText =
             StringBuilder(getString(R.string.your_score)).append(answerAccumulator?.getPoints())
+                .append(getString(R.string.out_of_score_string))
+                .append(answerAccumulator?.getPossiblePoints())
         binding.tvYourScore.text = resultText.toString()
     }
 
