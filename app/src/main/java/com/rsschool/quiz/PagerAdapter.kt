@@ -3,6 +3,11 @@ package com.rsschool.quiz
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.rsschool.quiz.fragments.QuestionFragment
+import com.rsschool.quiz.fragments.ShareFragment
+import com.rsschool.quiz.model.Question
+import com.rsschool.quiz.utils.QuestionList
+import com.rsschool.quiz.utils.Themes
 
 class PagerAdapter(private val activity: FragmentActivity) : FragmentStateAdapter(activity) {
     //+1 is for share fragment

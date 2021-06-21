@@ -1,4 +1,4 @@
-package com.rsschool.quiz
+package com.rsschool.quiz.fragments
 
 import android.content.Context
 import android.content.Intent
@@ -7,7 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.rsschool.quiz.AnswerAccumulator
+import com.rsschool.quiz.R
+import com.rsschool.quiz.Router
 import com.rsschool.quiz.databinding.FragmentShareBinding
+import com.rsschool.quiz.utils.Answers
 import kotlin.system.exitProcess
 
 class ShareFragment : Fragment() {

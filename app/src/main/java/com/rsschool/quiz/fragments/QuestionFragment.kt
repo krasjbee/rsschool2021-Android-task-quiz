@@ -1,4 +1,4 @@
-package com.rsschool.quiz
+package com.rsschool.quiz.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -12,7 +12,13 @@ import androidx.core.view.get
 import androidx.core.view.isVisible
 import androidx.core.view.size
 import androidx.fragment.app.Fragment
+import com.rsschool.quiz.AnswerAccumulator
+import com.rsschool.quiz.R
+import com.rsschool.quiz.Router
 import com.rsschool.quiz.databinding.FragmentQuizBinding
+import com.rsschool.quiz.model.Question
+import com.rsschool.quiz.utils.Answers
+import com.rsschool.quiz.utils.QuestionList
 
 class QuestionFragment : Fragment() {
     private var _binding: FragmentQuizBinding? = null

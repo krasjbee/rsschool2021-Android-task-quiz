@@ -1,4 +1,6 @@
-package com.rsschool.quiz
+package com.rsschool.quiz.utils
+
+import com.rsschool.quiz.model.Question
 
 object QuestionList {
     val questions = listOf(
