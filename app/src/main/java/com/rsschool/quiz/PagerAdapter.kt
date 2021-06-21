@@ -7,11 +7,14 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 class PagerAdapter(private val activity: FragmentActivity) : FragmentStateAdapter(activity) {
     //todo check if it's memoryleak
     //+1 is for share fragment
-    override fun getItemCount(): Int = QuestionList.questions.size//+1
+    override fun getItemCount(): Int = QuestionList.questions.size + 1
 
     override fun createFragment(position: Int): Fragment {
-        val currentQuestion = QuestionList.questions[position]
-
+        val currentQuestion: Question = try {
+            QuestionList.questions[position]
+        } catch (e: Exception) {
+            Question.EMPTY
+        }
         return when (position) {
             0 -> QuestionFragment.getInstance(
                 currentQuestion,
@@ -23,14 +26,8 @@ class PagerAdapter(private val activity: FragmentActivity) : FragmentStateAdapte
                 QuestionFragment.LAST_QUESTION,
                 position
             )
-            itemCount -> TODO("Set share fragment")
-            else -> QuestionFragment.getInstance(currentQuestion, position).also {
-                when (position.rem(2)) {
-                    1 -> activity.setTheme(R.style.Theme_Quiz_First)
-                    0 -> activity.setTheme(R.style.Theme_Quiz_Second)
-
-                }
-            }
+            itemCount - 1 -> ShareFragment()
+            else -> QuestionFragment.getInstance(currentQuestion, position)
         }
     }
 }

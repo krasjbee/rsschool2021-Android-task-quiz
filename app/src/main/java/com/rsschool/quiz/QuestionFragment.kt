@@ -7,25 +7,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.core.os.bundleOf
+import androidx.core.view.forEachIndexed
 import androidx.core.view.get
 import androidx.core.view.isVisible
 import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import com.rsschool.quiz.databinding.FragmentQuizBinding
 
-class QuestionFragment() : Fragment() {
+class QuestionFragment : Fragment() {
     private var _binding: FragmentQuizBinding? = null
     private val binding get() = _binding!!
     private var router: Router? = null
     private var accumulator: AnswerAccumulator? = null
+    private lateinit var question: Question
 
     override fun onAttach(context: Context) {
         if (context is Router) {
             router = context
         }
-        if (context.applicationContext is AnswerAccumulator) {
-            accumulator = context.applicationContext as AnswerAccumulator
-        }
+//        if (context.applicationContext is AnswerAccumulator) {
+//            accumulator = context.applicationContext as AnswerAccumulator
+//        }
+        accumulator = Answers
         super.onAttach(context)
     }
 
@@ -36,14 +39,13 @@ class QuestionFragment() : Fragment() {
     ): View {
         _binding = FragmentQuizBinding.inflate(inflater)
         val view = binding.root
-        val position = arguments?.getInt("position", -1)!!
 
         //TODO theme changer
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val question = arguments?.getSerializable("question") as Question
+        question = arguments?.getSerializable("question") as Question
         val state = arguments?.getInt("state", -1)
         val position = arguments?.getInt("position", -1)!!
         val questionText = question.questionText
@@ -52,14 +54,22 @@ class QuestionFragment() : Fragment() {
 
 
         binding.nextButton.setOnClickListener {
-            router?.nextFragment()
-            accumulator?.addAnswerToMap(position, binding.radioGroup.checkedRadioButtonId)
+            router?.toNextFragment()
+            accumulator?.addAnswerToMap(
+                position,
+                binding.radioGroup.checkedRadioButtonId,
+                getAnswerIndex()
+            )
             accumulator?.printMap()
 
         }
         binding.previousButton.setOnClickListener {
-            router?.prevFragment()
-            accumulator?.addAnswerToMap(position, binding.radioGroup.checkedRadioButtonId)
+            router?.toPrevFragment()
+            accumulator?.addAnswerToMap(
+                position,
+                binding.radioGroup.checkedRadioButtonId,
+                getAnswerIndex()
+            )
             accumulator?.printMap()
         }
         binding.nextButton.isEnabled = false
@@ -97,6 +107,15 @@ class QuestionFragment() : Fragment() {
         router = null
         accumulator = null
         super.onDetach()
+    }
+
+    private fun getAnswerIndex(): Int {
+        var checkIndex: Int = -1
+        binding.radioGroup.forEachIndexed { index, view ->
+            val radioButton = view as RadioButton
+            if (radioButton.isChecked) checkIndex = index
+        }
+        return checkIndex
     }
 
     companion object {
