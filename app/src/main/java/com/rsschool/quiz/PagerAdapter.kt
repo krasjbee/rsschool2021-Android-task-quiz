@@ -28,6 +28,7 @@ class PagerAdapter(private val activity: FragmentActivity) : FragmentStateAdapte
             itemCount - 1 -> ShareFragment()
             else -> QuestionFragment.getInstance(currentQuestion, position).also {
                 activity.setTheme(Themes.list[(position - 1).rem(10)])
+                //TODO window color
             }
         }
     }

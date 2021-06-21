@@ -1,7 +1,7 @@
 package com.rsschool.quiz
 
 object QuestionList {
-    val questions = listOf<Question>(
+    val questions = listOf(
         Question(
             "300?",
             listOf("programmista ", "traktorista"),

@@ -26,16 +26,12 @@ class ShareFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentShareBinding.inflate(inflater)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val resultText = StringBuilder("Your score is ").append(answerAccumulator?.getPoints())
-        binding.tvYourScore.text = resultText.toString()
-
         binding.ibExit.setOnClickListener {
             exitProcess(0)
         }
@@ -44,14 +40,27 @@ class ShareFragment : Fragment() {
             router?.toStartFragment()
         }
         binding.ibShare.setOnClickListener {
-            val intent = Intent().apply {
-                action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, answerAccumulator?.getAnswers())
-                type = "text/plain"
-            }
-            startActivity(intent)
+            shareResults()
         }
+        setupScore()
+
+
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun setupScore() {
+        val resultText =
+            StringBuilder(getString(R.string.your_score)).append(answerAccumulator?.getPoints())
+        binding.tvYourScore.text = resultText.toString()
+    }
+
+    private fun shareResults() {
+        val intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, answerAccumulator?.getAnswers())
+            type = "text/plain"
+        }
+        startActivity(intent)
     }
 
     override fun onDestroyView() {

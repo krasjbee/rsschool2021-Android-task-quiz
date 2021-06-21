@@ -16,12 +16,16 @@ class MainActivity : AppCompatActivity(), Router {
         val view = binding.root
         setContentView(view)
         pager = binding.pager
+        setupPager()
+
+    }
+
+    private fun setupPager() {
         pager.apply {
             adapter = PagerAdapter(this@MainActivity)
             orientation = ViewPager2.ORIENTATION_HORIZONTAL //FIXME delete if it's unnecessary
             isUserInputEnabled = false
         }
-
     }
 
     override fun toNextFragment() {

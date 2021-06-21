@@ -5,8 +5,6 @@ interface AnswerAccumulator {
     fun getPoints(): Int
     fun getPossiblePoints():Int
     fun getSelectedAnswerId(position:Int):Int
-    //fixme delete
-    fun printMap()
     fun resetAnswers()
     fun getAnswers(): String
 }

@@ -25,9 +25,6 @@ class QuestionFragment : Fragment() {
         if (context is Router) {
             router = context
         }
-//        if (context.applicationContext is AnswerAccumulator) {
-//            accumulator = context.applicationContext as AnswerAccumulator
-//        }
         accumulator = Answers
         super.onAttach(context)
     }
@@ -38,10 +35,7 @@ class QuestionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentQuizBinding.inflate(inflater)
-        val view = binding.root
-
-        //TODO theme changer
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,40 +45,36 @@ class QuestionFragment : Fragment() {
         val questionText = question.questionText
         val answers = question.answers
 
-
-
         binding.nextButton.setOnClickListener {
-            router?.toNextFragment()
-            accumulator?.addAnswerToMap(
-                position,
-                binding.radioGroup.checkedRadioButtonId,
-                getAnswerIndex()
-            )
-            accumulator?.printMap()
-
+            navigateToNextFragment(position)
         }
         binding.previousButton.setOnClickListener {
-            router?.toPrevFragment()
-            accumulator?.addAnswerToMap(
-                position,
-                binding.radioGroup.checkedRadioButtonId,
-                getAnswerIndex()
-            )
-            accumulator?.printMap()
+            navigateToPreviousFragment(position)
         }
+
         binding.nextButton.isEnabled = false
-        when (state) {
-            FIRST_QUESTION -> binding.previousButton.isEnabled = false
-            LAST_QUESTION -> binding.nextButton.text = "SUBMIT"
-            else -> binding.nextButton.text = "Next"
-        }
         binding.toolbar.title = "Question ${position + 1}"
         binding.question.text = questionText
+
+        setupFragmentByState(state)
 
         binding.radioGroup.setOnCheckedChangeListener { _, _ ->
             binding.nextButton.isEnabled = true
         }
 
+        setupLastRadioButtonChoice(position, answers)
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun setupFragmentByState(state: Int?) {
+        when (state) {
+            FIRST_QUESTION -> binding.previousButton.isEnabled = false
+            LAST_QUESTION -> binding.nextButton.text = getString(R.string.submit_button_text)
+            else -> binding.nextButton.text = getString(R.string.next_button_text)
+        }
+    }
+
+    private fun setupLastRadioButtonChoice(position: Int, answers: List<String>) {
         for (i in 0 until binding.radioGroup.size) {
             val radioButton: RadioButton = binding.radioGroup[i] as RadioButton
             val id = accumulator?.getSelectedAnswerId(position)
@@ -95,7 +85,24 @@ class QuestionFragment : Fragment() {
                 radioButton.isVisible = false
             }
         }
-        super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun navigateToNextFragment(position: Int) {
+        router?.toNextFragment()
+        accumulator?.addAnswerToMap(
+            position,
+            binding.radioGroup.checkedRadioButtonId,
+            getAnswerIndex()
+        )
+    }
+
+    private fun navigateToPreviousFragment(position: Int) {
+        router?.toPrevFragment()
+        accumulator?.addAnswerToMap(
+            position,
+            binding.radioGroup.checkedRadioButtonId,
+            getAnswerIndex()
+        )
     }
 
     override fun onDestroyView() {
@@ -136,6 +143,5 @@ class QuestionFragment : Fragment() {
 
         const val FIRST_QUESTION = 0
         const val LAST_QUESTION = 1
-        //const val CASUAL_QUESTION =2
     }
 }

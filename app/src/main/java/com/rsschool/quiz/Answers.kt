@@ -1,6 +1,5 @@
 package com.rsschool.quiz
 
-import android.util.Log
 
 object Answers : AnswerAccumulator {
 
@@ -13,13 +12,6 @@ object Answers : AnswerAccumulator {
 
     override fun getPoints(): Int {
         var sumOfPoints = 0
-//        userAnswerMap.forEach {
-//            val rightAnswer = QuestionList.questions[it.key].correctAnswerNumber
-//            val answerIndex = it.value.second
-//            if (rightAnswer==answerIndex) sumOfPoints+=10
-//        }
-//        return sumOfPoints
-
         for (key in userAnswerMap.keys) {
             val rightAnswer = QuestionList.questions[key].correctAnswerNumber
             val answerIndex = userAnswerMap[key]?.second
@@ -47,7 +39,4 @@ object Answers : AnswerAccumulator {
 
     override fun getSelectedAnswerId(position: Int) = userAnswerMap[position]?.first ?: -1
 
-    override fun printMap() {
-        Log.d("qwe", "printMap: ${userAnswerMap.toString()} ")
-    }
 }
