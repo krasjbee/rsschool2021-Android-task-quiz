@@ -44,6 +44,7 @@ class QuestionFragment : Fragment() {
         val questionText = question.questionText
         val answers = question.answers
 
+        //Setting up onClickListeners
         binding.nextButton.setOnClickListener {
             navigateToNextFragment(position)
         }
@@ -53,13 +54,13 @@ class QuestionFragment : Fragment() {
         binding.toolbar.setOnClickListener {
             navigateToNextFragment(position)
         }
-
+        //Setting initial state of views
         binding.nextButton.isEnabled = false
         binding.toolbar.title = "Question ${position + 1}"
         binding.question.text = questionText
 
-        setupFragmentByState(position)
-
+        setupFragmentByPosition(position)
+        //this listener checks if something is checked and enables "next button"
         binding.radioGroup.setOnCheckedChangeListener { _, _ ->
             binding.nextButton.isEnabled = true
         }
@@ -68,7 +69,8 @@ class QuestionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    private fun setupFragmentByState(position: Int) {
+    //Setting up buttons in fragment by it's position in adapter
+    private fun setupFragmentByPosition(position: Int) {
         when (position) {
             0 -> binding.previousButton.isEnabled = false
             QuestionList.questions.lastIndex -> binding.nextButton.text =
@@ -77,6 +79,8 @@ class QuestionFragment : Fragment() {
         }
     }
 
+    //restoring last user choice from answer accumulator
+    //if there is too much fragments , so state of choice may be lost
     private fun setupLastRadioButtonChoice(position: Int, answers: List<String>) {
         for (i in 0 until binding.radioGroup.size) {
             val radioButton: RadioButton = binding.radioGroup[i] as RadioButton
@@ -119,6 +123,7 @@ class QuestionFragment : Fragment() {
         super.onDetach()
     }
 
+    //get index of chosen radioButton is group
     private fun getAnswerIndex(): Int {
         var checkIndex: Int = -1
         binding.radioGroup.forEachIndexed { index, view ->

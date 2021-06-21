@@ -8,6 +8,7 @@ data class Question(
     val correctAnswerNumber: Int
 ) : Serializable {
     companion object {
+        //to avoid null and safecall operators
         val EMPTY: Question = Question("", emptyList(), 0)
     }
 }

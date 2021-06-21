@@ -32,6 +32,7 @@ class ShareFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         binding.ibExit.setOnClickListener {
             exitProcess(0)
         }
@@ -42,13 +43,14 @@ class ShareFragment : Fragment() {
         binding.ibShare.setOnClickListener {
             shareResults()
         }
-        setupScore()
+
+        setupScoreText()
 
 
         super.onViewCreated(view, savedInstanceState)
     }
 
-    private fun setupScore() {
+    private fun setupScoreText() {
         val resultText =
             StringBuilder(getString(R.string.your_score)).append(answerAccumulator?.getPoints())
                 .append(getString(R.string.out_of_score_string))

@@ -2,14 +2,14 @@ package com.rsschool.quiz
 
 
 object Answers : AnswerAccumulator {
-
+    //map of user answers and ids of checked buttons
     private val userAnswerMap: MutableMap<Int, Pair<Int, Int>> = mutableMapOf()
 
     override fun addAnswerToMap(questionIndex: Int, viewId: Int, answerIndex: Int) {
         userAnswerMap[questionIndex] = viewId to answerIndex
     }
 
-
+    //get user overall score
     override fun getPoints(): Int {
         var sumOfPoints = 0
         for (key in userAnswerMap.keys) {
@@ -24,6 +24,7 @@ object Answers : AnswerAccumulator {
         userAnswerMap.clear()
     }
 
+    //get user answers to share it
     override fun getAnswers(): String {
         val answersStingBuilder = StringBuilder()
         for (key in userAnswerMap.keys) {
@@ -37,6 +38,7 @@ object Answers : AnswerAccumulator {
 
     override fun getPossiblePoints() = QuestionList.questions.size * 10
 
+    //returns id of checked view
     override fun getSelectedAnswerId(position: Int) = userAnswerMap[position]?.first ?: -1
 
 }

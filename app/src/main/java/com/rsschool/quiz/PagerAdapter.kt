@@ -11,11 +11,14 @@ class PagerAdapter(private val activity: FragmentActivity) : FragmentStateAdapte
 
     @SuppressLint("ResourceAsColor")
     override fun createFragment(position: Int): Fragment {
+
         val currentQuestion: Question = try {
             QuestionList.questions[position]
+            //catching if our array is not out of bounds (it never should for question fragments
         } catch (e: Exception) {
             Question.EMPTY
         }
+
         return when (position) {
             itemCount - 1 -> ShareFragment()
             else -> QuestionFragment.getInstance(currentQuestion, position).also {
