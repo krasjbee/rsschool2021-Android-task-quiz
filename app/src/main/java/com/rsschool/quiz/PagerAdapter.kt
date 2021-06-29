@@ -12,7 +12,6 @@ class PagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) 
     override fun getItemCount(): Int = QuestionList.questions.size + 1
 
     override fun createFragment(position: Int): Fragment {
-
         return if (position <= QuestionList.questions.lastIndex) {
             QuestionFragment.getInstance(QuestionList.questions[position], position)
         } else {
