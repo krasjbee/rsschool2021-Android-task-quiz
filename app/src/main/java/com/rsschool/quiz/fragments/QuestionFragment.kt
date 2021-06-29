@@ -50,7 +50,36 @@ class QuestionFragment : Fragment() {
         val questionText = question.questionText
         val answers = question.answers
 
+        //Setting initial state of views
+        setupInitialViewState(position, questionText)
+
         //Setting up onClickListeners
+        setupClickListeners(position)
+
+        //Setting up
+        setupNextButtonText(position)
+
+        //this listener checks if something is checked and enables "next button"
+        binding.radioGroup.setOnCheckedChangeListener { _, _ ->
+            binding.nextButton.isEnabled = true
+        }
+
+        //Setting up previous choice if exists
+        setupLastRadioButtonChoice(position, answers)
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun setupInitialViewState(position: Int, questionText: String) {
+        binding.toolbar.isEnabled = position != 0
+        binding.toolbar.title = "Question ${position + 1}"
+
+        binding.previousButton.isEnabled = position != 0
+        binding.nextButton.isEnabled = false
+
+        binding.question.text = questionText
+    }
+
+    private fun setupClickListeners(position: Int) {
         binding.nextButton.setOnClickListener {
             navigateToNextFragment(position)
         }
@@ -60,30 +89,14 @@ class QuestionFragment : Fragment() {
         binding.toolbar.setOnClickListener {
             navigateToPreviousFragment(position)
         }
-        binding.toolbar.isEnabled = position != 0
-
-        //Setting initial state of views
-        binding.nextButton.isEnabled = false
-        binding.toolbar.title = "Question ${position + 1}"
-        binding.question.text = questionText
-
-        setupFragmentByPosition(position)
-        //this listener checks if something is checked and enables "next button"
-        binding.radioGroup.setOnCheckedChangeListener { _, _ ->
-            binding.nextButton.isEnabled = true
-        }
-
-        setupLastRadioButtonChoice(position, answers)
-        super.onViewCreated(view, savedInstanceState)
     }
 
     //Setting up buttons in fragment by it's position in adapter
-    private fun setupFragmentByPosition(position: Int) {
-        when (position) {
-            0 -> binding.previousButton.isEnabled = false
-            QuestionList.questions.lastIndex -> binding.nextButton.text =
-                getString(R.string.submit_button_text)
-            else -> binding.nextButton.text = getString(R.string.next_button_text)
+    private fun setupNextButtonText(position: Int) {
+        if (position == QuestionList.questions.lastIndex) {
+            binding.nextButton.text = getString(R.string.submit_button_text)
+        } else {
+            binding.nextButton.text = getString(R.string.next_button_text)
         }
     }
 
@@ -149,6 +162,5 @@ class QuestionFragment : Fragment() {
             fragment.arguments = bundle
             return fragment
         }
-
     }
 }

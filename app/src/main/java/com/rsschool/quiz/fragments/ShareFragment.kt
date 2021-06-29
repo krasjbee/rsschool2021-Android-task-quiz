@@ -36,7 +36,15 @@ class ShareFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        //Setting up clicklisteners
+        setupClickListeners()
+        //Setting up score
+        setupScoreText()
 
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun setupClickListeners() {
         binding.ibExit.setOnClickListener {
             exitProcess(0)
         }
@@ -47,11 +55,6 @@ class ShareFragment : Fragment() {
         binding.ibShare.setOnClickListener {
             shareResults()
         }
-
-        setupScoreText()
-
-
-        super.onViewCreated(view, savedInstanceState)
     }
 
     private fun setupScoreText() {
