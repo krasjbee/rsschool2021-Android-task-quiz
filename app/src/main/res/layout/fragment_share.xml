@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
 
     <TextView
@@ -18,6 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
+        android:layout_marginBottom="@dimen/share_elements_margins"
         tools:text="Your score is 30 qweqweqweqwe" />
 
     <ImageButton
@@ -30,6 +32,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="@dimen/share_elements_margins"
         app:layout_constraintTop_toBottomOf="@+id/tv_your_score" />
 
     <ImageButton
@@ -42,6 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="@dimen/share_elements_margins"
         app:layout_constraintTop_toBottomOf="@+id/ib_share" />
 
     <ImageButton
