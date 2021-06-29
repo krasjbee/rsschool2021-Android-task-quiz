@@ -58,8 +58,10 @@ class QuestionFragment : Fragment() {
             navigateToPreviousFragment(position)
         }
         binding.toolbar.setOnClickListener {
-            navigateToNextFragment(position)
+            navigateToPreviousFragment(position)
         }
+        binding.toolbar.isEnabled = position != 0
+
         //Setting initial state of views
         binding.nextButton.isEnabled = false
         binding.toolbar.title = "Question ${position + 1}"
