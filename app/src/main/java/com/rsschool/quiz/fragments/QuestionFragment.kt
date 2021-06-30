@@ -70,7 +70,9 @@ class QuestionFragment : Fragment() {
     }
 
     private fun setupInitialViewState(position: Int, questionText: String) {
-        binding.toolbar.isEnabled = position != 0
+        if (position == 0) {
+            binding.toolbar.navigationIcon = null
+        }
         binding.toolbar.title = "Question ${position + 1}"
 
         binding.previousButton.isEnabled = position != 0
@@ -86,7 +88,7 @@ class QuestionFragment : Fragment() {
         binding.previousButton.setOnClickListener {
             navigateToPreviousFragment(position)
         }
-        binding.toolbar.setOnClickListener {
+        binding.toolbar.setNavigationOnClickListener {
             navigateToPreviousFragment(position)
         }
     }

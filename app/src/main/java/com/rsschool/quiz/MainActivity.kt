@@ -50,5 +50,9 @@ class MainActivity : AppCompatActivity(), Router {
         pager.setCurrentItem(0, false)
         pager.adapter = PagerAdapter(this)
     }
-    //fixme check if unregister callback is needed
+
+    override fun onDestroy() {
+        pager.unregisterOnPageChangeCallback(changeThemeCallback)
+        super.onDestroy()
+    }
 }
